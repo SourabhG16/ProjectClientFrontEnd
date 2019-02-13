@@ -1,0 +1,44 @@
+<ion-header>
+    <!-- <script src="C:\Users\Roggh\Desktop\working_src\node_modules\ion-autocomplete\distion-autocomplete.js"></script> -->
+    <!-- <link href="C:\Users\Roggh\Desktop\working_src\node_modules\ion-autocomplete\distion-autocomplete.css" rel="stylesheet"> -->
+    <ion-toolbar>
+      <ion-title>
+        SelectRoute!
+      </ion-title>
+      <ion-buttons slot="end">
+          <div class="bar bar-header">
+              <ion-button align="right" class="button button-clear button-positive" (click)="closeModal()"><ion-icon name="arrow-round-back"></ion-icon></ion-button>
+            </div>
+        </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content padding align="center">
+  <!-- <form align="center" name="modal" >
+    <ion-searchbar placeholder="Your Location" animated ></ion-searchbar>
+    <ion-searchbar ion-autocomplete type="text" readonly="readonly" class="ion-autocomplete" autocomplete="off" max-selected-items="1" placeholder="Destination" animated name="dest" [(ngModel)]="dest" (ionChange)="doSomething($event)"></ion-searchbar>
+    <ion-searchbar  placeholder="Destination"  [(ngModel)]="stlist"  (ionChange)="doSomething($event)"></ion-searchbar> -->
+    <!-- <ion-searchbar [(ngModel)]="YourLoc" value="{{src.Address}}" (ionChange)="doNothing($event)"></ion-searchbar> -->
+    <div *ngIf="srcbool" class="spinner-container">
+        <ion-text color="secondary"><h6>Nearest Station:{{src.Address}}</h6></ion-text>
+    </div>
+    <div *ngIf="!DestSet" class="spinner-container">
+    <ion-searchbar placeholder="Destination" [(ngModel)]="Destination"  (ionChange)="doSomething($event)"></ion-searchbar>
+</div>
+<div *ngIf="DestSet" class="spinner-container">
+        <ion-text color="secondary"><h6>Destination Station:{{finalDest.Address}}</h6></ion-text>
+    </div>
+    <div *ngIf="searching" class="spinner-container">
+        <ion-spinner></ion-spinner>
+    </div>
+         <ion-list>
+        <ion-item *ngFor="let st of stlist" (click)="setDest(st,st.Latitude,st.Longitude)" >
+            {{st.Landmark}},{{st.Address}}
+        </ion-item>
+    </ion-list>
+    <ion-button (click)="NavNow()">
+        <ion-icon name="paper-plane"></ion-icon>
+    </ion-button>
+  <!-- </form> -->
+</ion-content> 
+

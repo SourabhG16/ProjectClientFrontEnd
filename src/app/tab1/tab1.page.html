@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+    <ion-title>
+      GetSetGo!
+    </ion-title>
+    <ion-buttons slot="end">
+        <div class="bar bar-header">
+            <ion-button align="right" class="button button-clear button-positive" (click)="presentModal()"><ion-icon name="bicycle"></ion-icon></ion-button>
+          </div>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+    
+   <!-- <a class="button button-icon icon bicycle"></a> -->
+    <!--create a element for map. #Map - identifier -->
+  <div #Map class="map"></div>
+</ion-content>
+<script type='text/javascript' src='../../../config.js'></script>

@@ -1,0 +1,8 @@
+{
+  "name": "tabseg",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular",
+  "id": "72736f8e"
+}
