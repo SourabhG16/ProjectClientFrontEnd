@@ -4,6 +4,8 @@ import {Geolocation} from '@ionic-native/geolocation/ngx';
 import {ModalController} from '@ionic/angular';
 import {ModalPage} from '../modal/modal.page';
 import { Config } from "../../../config";
+import { GlobalVarService } from '../global-var.service';
+// var isEmpty = require('is-empty')
 declare var google;
 @Component({
   selector: 'app-tab1',
@@ -25,7 +27,7 @@ export class Tab1Page {
   markerOptions: any = {position: null, map: null, title: null};
   marker: any;
   
-constructor(public zone: NgZone, public geolocation: Geolocation,public modalController: ModalController,public Config:Config) {
+constructor(public zone: NgZone, public geolocation: Geolocation,public modalController: ModalController,public Config:Config, public global_var: GlobalVarService) {
   /*load google map script dynamically */
     var apiKey=Config.apireturn();
     console.log(apiKey);
@@ -70,12 +72,22 @@ async presentModal() {
     });
     modal.onDidDismiss()
       .then((data) => {
-         this.RouteJson = data; // Here's your selected user!
+        console.log("Status");
+        console.log(this.global_var.Unreachable);  
+        
+        if(!this.global_var.Unreachable)
+        {
+        console.log("data pres");
+        this.RouteJson = data; // Here's your selected user!
         console.log(this.RouteJson);
-      this.lat1=this.RouteJson.data[0].Longitude;
+        this.lat1=this.RouteJson.data[0].Longitude;
         this.lat2=this.RouteJson.data[1].Latitude;
         this.long2=this.RouteJson.data[1].Longitude;
         this.long1=this.RouteJson.data[0].Longitude;
+        }
+        else{
+          console.log("unreachable");
+        }
     });
     return await modal.present();
   }
@@ -97,4 +109,5 @@ async presentModal() {
         }
       });
 }*/
+
 }
