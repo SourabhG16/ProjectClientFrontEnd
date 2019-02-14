@@ -15,6 +15,7 @@ import { MenuComponent } from './menu/menu.component';
 import { MenuItemComponent } from './components/menu-item/menu-item.component';
 import { ModalPageModule } from "../app/modal/modal.module";
 import { FormsModule, ReactiveFormsModule } from '../../node_modules/@angular/forms';
+import { Config } from "../../config";
 //import { ModalPage } from "../app/modal/modal.page";
 export function jwtOptionsFactory(storage) {
   return {
@@ -45,6 +46,7 @@ export function jwtOptionsFactory(storage) {
     StatusBar,
     SplashScreen,
     Geolocation,
+    Config,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

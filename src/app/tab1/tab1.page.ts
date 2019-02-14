@@ -3,7 +3,7 @@ import {Geolocation} from '@ionic-native/geolocation/ngx';
 //import { ActionSheetController } from '@ionic/angular';
 import {ModalController} from '@ionic/angular';
 import {ModalPage} from '../modal/modal.page';
-import { config } from "../../../config.js";
+import { Config } from "../../../config";
 declare var google;
 @Component({
   selector: 'app-tab1',
@@ -24,13 +24,15 @@ export class Tab1Page {
   location = {lat: null, lng: null};
   markerOptions: any = {position: null, map: null, title: null};
   marker: any;
-  apiKey: any = config.apiKey;
-constructor(public zone: NgZone, public geolocation: Geolocation,public modalController: ModalController) {
+  
+constructor(public zone: NgZone, public geolocation: Geolocation,public modalController: ModalController,public Config:Config) {
   /*load google map script dynamically */
+    var apiKey=Config.apireturn();
+    console.log(apiKey);
     const script = document.createElement('script');
     script.id = 'googleMap';
-    if (this.apiKey) {
-        script.src = 'https://maps.googleapis.com/maps/api/js?key=' + this.apiKey;
+    if (apiKey) {
+        script.src = 'https://maps.googleapis.com/maps/api/js?key=' + apiKey;
     } else {
         script.src = 'https://maps.googleapis.com/maps/api/js?key= ';
     }
@@ -56,7 +58,7 @@ constructor(public zone: NgZone, public geolocation: Geolocation,public modalCon
         this.directionsService = new google.maps.DirectionsService;
         this.directionsDisplay = new google.maps.DirectionsRenderer;
        this.directionsDisplay.setMap(this.map);
-       this.RouteTO();
+      // this.RouteTO();
           }, 3000);
 }
 async presentModal() {
@@ -77,7 +79,7 @@ async presentModal() {
     });
     return await modal.present();
   }
- async RouteTO()
+/* async RouteTO()
   {
       if (typeof this.lat1 == "undefined" || typeof this.long1 == "undefined") {
         await this.RouteTO();
@@ -94,5 +96,5 @@ async presentModal() {
           window.alert('Directions request failed due to '+status);
         }
       });
-}
+}*/
 }
