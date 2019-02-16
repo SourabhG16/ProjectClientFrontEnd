@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
+import { GlobalVarService} from "../global-var.service";
 // import { HomePage } from '../home/home.page';
 import { Router } from '@angular/router';
 //  import { Http } from '@angular/http';
@@ -18,17 +18,19 @@ export class LoginPage implements OnInit {
 
   credentialsForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router,private GlobalVarService:GlobalVarService) { }
 
   ngOnInit() {
      this.credentialsForm = this.formBuilder.group({
-       email: ['', Validators.required],
-       password: ['', [Validators.required, Validators.minLength(6)]]
+       Email: ['', Validators.required],
+       Password: ['', [Validators.required, Validators.minLength(6)]]
      });
   }
   onSubmit() {
     // console.log('In sign in');
-    this.authService.login(this.credentialsForm.value).subscribe();
+    this.authService.login(this.credentialsForm.value).subscribe(res=>{
+      //console.log(res["token"]);
+    });
     // this.ngOnInit();
   }
   // register_func() {

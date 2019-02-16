@@ -40,7 +40,6 @@ export class RouteService {
           })
         );
       // }
-
   }
   showAlert(msg) {
     let alert = this.alertController.create({
@@ -50,4 +49,17 @@ export class RouteService {
       });
       alert.then(alert => alert.present());
     }
+TripRecord(data)
+{ 
+  console.log("in triprecord");
+  console.log(data);
+  return this.http.post('http://localhost:3000/api/first/login/triprecord',data).pipe(
+   catchError(e => {
+     this.showAlert(e.error.msg);
+     throw new Error(e);
+   })
+ );
 }
+}
+
+

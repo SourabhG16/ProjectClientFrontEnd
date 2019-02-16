@@ -5,14 +5,6 @@ import { Injectable } from '@angular/core';
 })
 export class GlobalVarService {
   public Unreachable: boolean;
+  public LoggedUser:String;
   constructor() { }
-
-  set_status(status)
-  {
-    this.Unreachable=status;
-  }
-  get_status()
-  {
-    return this.Unreachable;
-  }
 }

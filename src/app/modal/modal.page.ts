@@ -27,11 +27,7 @@ export class ModalPage implements OnInit {
   srcbool:boolean=false;
   markerOptions: any = {position: null, map: null, title: null};
   marker: any;
-    apiKey: any = 'AIzaSyBGhOwi5tJLcH5hKBG7fhXLpauPC1Ja76s'; /*Your API Key*/
-  // apiKey: any = 'AIzaSyBZamoub9SCWL2GriEBRSgLGVVrF0QPakk'; /*Your API Key 2nd*/
-  
   constructor(private nav:NavController,private modalCtrl:ModalController,private geolocation:Geolocation,private formsmodule:FormsModule,private reactive:ReactiveFormsModule,private routeservice:RouteService,public alertController: AlertController,public global_var: GlobalVarService) { 
-
   }
   
   ngOnInit() {
@@ -51,8 +47,8 @@ export class ModalPage implements OnInit {
   {
     this.geolocation.getCurrentPosition().then((resp) => {
       console.log(resp.coords.latitude,resp.coords.longitude);
-      //  this.routeservice.Source(resp.coords.latitude,resp.coords.longitude).subscribe(res =>
-      this.routeservice.Source(18.500314,73.861234).subscribe(res =>
+       this.routeservice.Source(resp.coords.latitude,resp.coords.longitude).subscribe(res =>
+      //this.routeservice.Source(18.500314,73.861234).subscribe(res =>
       {
         if(res != null)
         {
@@ -76,12 +72,10 @@ export class ModalPage implements OnInit {
   if($event.target.value.length > 1)
   {
     this.searching = true;
-    this.routeservice.Search($event.target.value).subscribe(res => {
-      
+    this.routeservice.Search($event.target.value).subscribe(res => {   
       //this.router.navigateByUrl('/login');
        this.stlist=res;
-      //  var i;var lt=Object.keys(res).length;
-      
+      //  var i;var lt=Object.keys(res).length;  
        console.log(this.stlist);
        this.searching = false;
        console.log(Object.keys(res).length)  
@@ -94,15 +88,14 @@ export class ModalPage implements OnInit {
     this.searching = false;
   }
  }
- setDest(landm:any,lati:BigInteger,longi:BigInteger)
+ setDest(finald:any)
  {
-  console.log(lati);
-  console.log(longi);
-  console.log(landm);
-  this.finalDest=landm;
+  
+  this.finalDest=finald;
   this.stlist=[];
   this.DestSet=true;
   this.data=this.data.concat(this.finalDest,this.src);
+  this.data=this.data.concat(this.global_var.LoggedUser);
  // this.data=this.finalDest.concat(this.src);
  } 
  async presentAlert(){

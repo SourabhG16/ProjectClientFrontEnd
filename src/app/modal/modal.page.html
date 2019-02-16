@@ -32,7 +32,7 @@
         <ion-spinner></ion-spinner>
     </div>
          <ion-list>
-        <ion-item *ngFor="let st of stlist" (click)="setDest(st,st.Latitude,st.Longitude)" >
+        <ion-item *ngFor="let st of stlist" (click)="setDest(st)" >
             {{st.Landmark}},{{st.Address}}
         </ion-item>
     </ion-list>

@@ -5,6 +5,7 @@ import {ModalController} from '@ionic/angular';
 import {ModalPage} from '../modal/modal.page';
 import { Config } from "../../../config";
 import { GlobalVarService } from '../global-var.service';
+import { RouteService } from '../route.service';
 // var isEmpty = require('is-empty')
 declare var google;
 @Component({
@@ -27,10 +28,9 @@ export class Tab1Page {
   markerOptions: any = {position: null, map: null, title: null};
   marker: any;
   
-constructor(public zone: NgZone, public geolocation: Geolocation,public modalController: ModalController,public Config:Config, public global_var: GlobalVarService) {
+constructor(public zone: NgZone, public geolocation: Geolocation,public modalController: ModalController,public Config:Config, public global_var: GlobalVarService,private routeservice: RouteService) {
   /*load google map script dynamically */
     var apiKey=Config.apireturn();
-    console.log(apiKey);
     const script = document.createElement('script');
     script.id = 'googleMap';
     if (apiKey) {
@@ -84,6 +84,7 @@ async presentModal() {
         this.lat2=this.RouteJson.data[1].Latitude;
         this.long2=this.RouteJson.data[1].Longitude;
         this.long1=this.RouteJson.data[0].Longitude;
+        this.routeservice.TripRecord(this.RouteJson).subscribe(res =>{});
         }
         else{
           console.log("unreachable");

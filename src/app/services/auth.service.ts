@@ -6,7 +6,7 @@ import { Storage } from '@ionic/storage';
 import { environment } from '../../environments/environment';
 import { tap, catchError } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
-
+import {  GlobalVarService} from "../global-var.service";
 const TOKEN_KEY = 'access_token';
 
 @Injectable({
@@ -19,7 +19,7 @@ export class AuthService {
   authenticationState = new BehaviorSubject(false);
 
   constructor(private http: HttpClient, private helper: JwtHelperService, private storage: Storage,
-    private plt: Platform, private alertController: AlertController) {
+    private plt: Platform, private alertController: AlertController,private GlobalVarService:GlobalVarService) {
     this.plt.ready().then(() => {
       this.checkToken();
     });
@@ -36,6 +36,7 @@ export class AuthService {
           this.authenticationState.next(true);
         } else {
           this.storage.remove(TOKEN_KEY);
+          this.GlobalVarService.LoggedUser=null;
         }
       }
     });
@@ -56,6 +57,8 @@ export class AuthService {
         tap(res => {
           this.storage.set(TOKEN_KEY, res['token']);
           this.user = this.helper.decodeToken(res['token']);
+          console.log(res["Name"]);
+          this.GlobalVarService.LoggedUser=res["Name"];
           this.authenticationState.next(true);
         }),
         catchError(e => {
@@ -68,6 +71,7 @@ export class AuthService {
   logout() {
     this.storage.remove(TOKEN_KEY).then(() => {
       this.authenticationState.next(false);
+      this.GlobalVarService.LoggedUser=null;
     });
   }
 

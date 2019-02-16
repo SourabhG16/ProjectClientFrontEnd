@@ -17,12 +17,12 @@
     <ion-list>
       <ion-item>
         <ion-label floating>Name</ion-label>
-        <ion-input formControlName="name" type="text" value=""></ion-input>
+        <ion-input formControlName="Name" type="text" value=""></ion-input>
       </ion-item>
   
       <ion-item>
         <ion-label floating>Age</ion-label>
-        <ion-input formControlName="age" type="Number" value=""></ion-input>
+        <ion-input formControlName="Age" type="Number" value=""></ion-input>
       </ion-item>
   
   <!-- <ion-list radio-group >
@@ -66,12 +66,12 @@
   
       <ion-item>
         <ion-label floating>Address</ion-label>
-        <ion-input formControlName="address" type="text"></ion-input>
+        <ion-input formControlName="Address" type="text"></ion-input>
       </ion-item>
   
       <ion-item>
         <ion-label floating>Email-Address</ion-label>
-        <ion-input formControlName="email" type="email"></ion-input>
+        <ion-input formControlName="Email" type="email"></ion-input>
       </ion-item>
   
       <ion-item>
@@ -79,9 +79,32 @@
         <ion-input formControlName="IdReceiver" type="text" value=""></ion-input>
       </ion-item>
   
+      <ion-list>
+        <ion-radio-group formControlName="Type">
+          <ion-list-header>
+            <ion-label>Type</ion-label>
+          </ion-list-header>
+      
+          <ion-item>
+            <ion-label>Tourist</ion-label>
+            <ion-radio slot="start" value="Tourist" checked></ion-radio>
+          </ion-item>
+      
+          <ion-item>
+            <ion-label>Commuter</ion-label>
+            <ion-radio slot="start" value="Commuter"></ion-radio>
+          </ion-item>
+      
+          <!-- <ion-item>
+            <ion-label>Buford</ion-label>
+            <ion-radio slot="start" value="buford"></ion-radio>
+          </ion-item> -->
+        </ion-radio-group>
+      </ion-list>
+
       <ion-item>
         <ion-label floating>Password</ion-label>
-        <ion-input formControlName="password" type="password" value=""></ion-input>
+        <ion-input formControlName="Password" type="password" value=""></ion-input>
       </ion-item>
   
       <ion-item>
