@@ -1,4 +1,4 @@
-import { Component , ElementRef, NgZone, ViewChild} from '@angular/core';
+import { Component , ElementRef, NgZone, ViewChild, OnInit} from '@angular/core';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
 //import { ActionSheetController } from '@ionic/angular';
 import {ModalController} from '@ionic/angular';
@@ -6,6 +6,8 @@ import {ModalPage} from '../modal/modal.page';
 import { Config } from "../../../config";
 import { GlobalVarService } from '../global-var.service';
 import { RouteService } from '../route.service';
+import { Router } from '@angular/router';
+
 // var isEmpty = require('is-empty')
 declare var google;
 @Component({
@@ -13,9 +15,10 @@ declare var google;
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
-export class Tab1Page {
+export class Tab1Page implements OnInit {
   @ViewChild('Map') mapElement: ElementRef;
   map: any;
+  private obj:any;
  directionsService:any; 
   directionsDisplay:any;
   mapOptions: any;
@@ -27,8 +30,9 @@ export class Tab1Page {
   location = {lat: null, lng: null};
   markerOptions: any = {position: null, map: null, title: null};
   marker: any;
-  
-constructor(public zone: NgZone, public geolocation: Geolocation,public modalController: ModalController,public Config:Config, public global_var: GlobalVarService,private routeservice: RouteService) {
+
+constructor(public zone: NgZone, public geolocation: Geolocation,public modalController: ModalController,public Config:Config, public global_var: GlobalVarService,private routeservice: RouteService,
+  private Router:Router) {
   /*load google map script dynamically */
     var apiKey=Config.apireturn();
     const script = document.createElement('script');
@@ -63,6 +67,14 @@ constructor(public zone: NgZone, public geolocation: Geolocation,public modalCon
       // this.RouteTO();
           }, 3000);
 }
+ngOnInit()
+{
+  this.routeservice.currentJson.subscribe(obj=> this.obj=obj);
+}
+newMessage()
+{
+  this.routeservice.changeJson(this.RouteJson);
+}
 async presentModal() {
     const modal = await this.modalController.create({
       component: ModalPage,
@@ -84,11 +96,17 @@ async presentModal() {
         this.lat2=this.RouteJson.data[1].Latitude;
         this.long2=this.RouteJson.data[1].Longitude;
         this.long1=this.RouteJson.data[0].Longitude;
-        this.routeservice.TripRecord(this.RouteJson).subscribe(res =>{});
+        this.newMessage();
+        this.routeservice.TripRecord(this.RouteJson).subscribe(res =>{
+          console.log('record inserted to db');
+        });
         }
         else{
           console.log("unreachable");
         }
+        //console.log(this.RouteJson.data[0].AreaName);
+        //console.log(this.RouteJson.data[1].AreaName); 
+        this.Router.navigate(['/payments'/*,{p1:this.RouteJson.data[0].AreaName,p2:this.RouteJson.data[1].AreaName}*/]);
     });
     return await modal.present();
   }

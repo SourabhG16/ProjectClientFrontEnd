@@ -7,13 +7,13 @@ const routes: Routes = [
   loadChildren: './tabs/tabs.module#TabsPageModule',
   // pathMatch: 'full',
   canActivate: [AuthGuardService] },
-  { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
+  { path: 'login', loadChildren: './login/login.module#LoginPageModule'},
   { path: 'register', loadChildren: './register/register.module#RegisterPageModule' },
   { path: 'modal', loadChildren: './modal/modal.module#ModalPageModule' },
+  {path:'payments',loadChildren:'./tab2/tab2.module#Tab2PageModule'},
 ];
-
 @NgModule({
-  imports: [RouterModule.forRoot(routes/*, { preloadingStrategy : PreloadAllModules}*/),
+  imports: [RouterModule.forRoot(routes/*,{ preloadingStrategy : PreloadAllModules}*/),
   ],
   exports: [RouterModule]
 })

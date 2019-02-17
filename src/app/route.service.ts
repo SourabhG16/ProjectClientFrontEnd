@@ -2,11 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { AlertController } from "@ionic/angular";
+import { BehaviorSubject } from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
 export class RouteService {
-
+  private Json1=new BehaviorSubject<any>("abc");
+  currentJson=this.Json1.asObservable();
+  changeJson(obj:any)
+  {
+    this.Json1.next(obj);
+  }
   constructor(private http:HttpClient,private alertController:AlertController) {
 
    }
@@ -54,6 +60,16 @@ TripRecord(data)
   console.log("in triprecord");
   console.log(data);
   return this.http.post('http://localhost:3000/api/first/login/triprecord',data).pipe(
+   catchError(e => {
+     this.showAlert(e.error.msg);
+     throw new Error(e);
+   })
+ );
+}
+Transaction(data)
+{
+  console.log("In Transaction"+data[1].AreaName);
+  return this.http.post('http://localhost:3000/api/first/login/transaction',data).pipe(
    catchError(e => {
      this.showAlert(e.error.msg);
      throw new Error(e);
