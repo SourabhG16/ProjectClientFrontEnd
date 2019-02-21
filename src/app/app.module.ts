@@ -8,6 +8,7 @@ import {Geolocation} from '@ionic-native/geolocation/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from "@angular/http";
 import { Storage, IonicStorageModule } from '@ionic/storage';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { MenuComponent } from './menu/menu.component';
@@ -48,6 +49,7 @@ export function jwtOptionsFactory(storage) {
     SplashScreen,
     Geolocation,
     Config,
+    HttpModule,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     GlobalVarService
   ],

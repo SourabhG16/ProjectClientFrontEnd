@@ -1,14 +1,13 @@
 import { Component , ElementRef, NgZone, ViewChild, OnInit} from '@angular/core';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
-//import { ActionSheetController } from '@ionic/angular';
 import {ModalController} from '@ionic/angular';
 import {ModalPage} from '../modal/modal.page';
 import { Config } from "../../../config";
 import { GlobalVarService } from '../global-var.service';
 import { RouteService } from '../route.service';
 import { Router } from '@angular/router';
-
-// var isEmpty = require('is-empty')
+import { HttpClient } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
 declare var google;
 @Component({
   selector: 'app-tab1',
@@ -19,28 +18,32 @@ export class Tab1Page implements OnInit {
   @ViewChild('Map') mapElement: ElementRef;
   map: any;
   private obj:any;
- directionsService:any; 
-  directionsDisplay:any;
+ /*directionsService:any; 
+ directionsDisplay:any;*/
   mapOptions: any;
+  data=[];
+  tripDur:any;
    RouteJson:any;
    lat1:any;
    long1:any;
    lat2:any;
+   response:any;
    long2:any;
   location = {lat: null, lng: null};
   markerOptions: any = {position: null, map: null, title: null};
   marker: any;
-
+  api:any;
 constructor(public zone: NgZone, public geolocation: Geolocation,public modalController: ModalController,public Config:Config, public global_var: GlobalVarService,private routeservice: RouteService,
-  private Router:Router) {
+  private Router:Router,private Http:HttpClient) {
   /*load google map script dynamically */
     var apiKey=Config.apireturn();
+    this.api=apiKey;
     const script = document.createElement('script');
     script.id = 'googleMap';
     if (apiKey) {
-        script.src = 'https://maps.googleapis.com/maps/api/js?key=' + apiKey;
+        script.src = 'https://maps.googleapis.com/maps/api/js?&language=en&key=' + apiKey;
     } else {
-        script.src = 'https://maps.googleapis.com/maps/api/js?key= ';
+        script.src = 'https://maps.googleapis.com/maps/api/js?&language=en&key= ';
     }
     document.head.appendChild(script);
     /*Get Current location*/
@@ -48,6 +51,7 @@ constructor(public zone: NgZone, public geolocation: Geolocation,public modalCon
         this.location.lat = position.coords.latitude;
         this.location.lng = position.coords.longitude;
     });
+   
     /*Map options*/
     this.mapOptions = {
         center: this.location,
@@ -57,14 +61,13 @@ constructor(public zone: NgZone, public geolocation: Geolocation,public modalCon
     setTimeout(() => {
         this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapOptions);
         /*Marker Options*/
+        //var directionsService = new google.maps.DirectionsService();
+        var directionsDisplay = new google.maps.DirectionsRenderer;
         this.markerOptions.position = this.location;
         this.markerOptions.map = this.map;
         this.markerOptions.title = 'My Location';
         this.marker = new google.maps.Marker(this.markerOptions);
-        this.directionsService = new google.maps.DirectionsService;
-        this.directionsDisplay = new google.maps.DirectionsRenderer;
-       this.directionsDisplay.setMap(this.map);
-      // this.RouteTO();
+       directionsDisplay.setMap(this.map);
           }, 3000);
 }
 ngOnInit()
@@ -92,7 +95,7 @@ async presentModal() {
         console.log("data pres");
         this.RouteJson = data; // Here's your selected user!
         console.log(this.RouteJson);
-        this.lat1=this.RouteJson.data[0].Longitude;
+        this.lat1=this.RouteJson.data[0].Latitude;
         this.lat2=this.RouteJson.data[1].Latitude;
         this.long2=this.RouteJson.data[1].Longitude;
         this.long1=this.RouteJson.data[0].Longitude;
@@ -106,27 +109,55 @@ async presentModal() {
         }
         //console.log(this.RouteJson.data[0].AreaName);
         //console.log(this.RouteJson.data[1].AreaName); 
-        this.Router.navigate(['/payments'/*,{p1:this.RouteJson.data[0].AreaName,p2:this.RouteJson.data[1].AreaName}*/]);
+        this.Router.navigate(['/payments']);
+        this.RouteTO();
     });
     return await modal.present();
   }
-/* async RouteTO()
+async RouteTO()
   {
+    this.mapOptions = {
+      center: this.location,
+      zoom: 15, 
+      mapTypeControl: false
+  };
+    this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapOptions);   
+    var directionsService = new google.maps.DirectionsService();
+    var directionsDisplay = new google.maps.DirectionsRenderer();
       if (typeof this.lat1 == "undefined" || typeof this.long1 == "undefined") {
         await this.RouteTO();
       };
-      this.directionsService.route({
-        origin: {lat:this.lat1,lng:this.long1},
-        destination: {lat:this.lat2,lng:this.long2},
+      var start = new google.maps.LatLng(this.lat1,this.long1);
+      var end = new google.maps.LatLng(this.lat2,this.long2);
+      directionsService.route({
+        origin: start,
+        destination:end,
         travelMode: 'DRIVING'
       }, (response, status) => {
         if (status === 'OK') {
-          console.log("abcd");
-          this.directionsDisplay.setDirections(response);
+         // console.log(response.routes[0].legs[0].duration.text);
+         response.routes[0].legs[0].duration.text.replace("10 minsNaN","10");
+          this.tripDur=(response.routes[0].legs[0].duration.text)+((response.routes[0].legs[0].duration.text)*1/2);     
+          directionsDisplay.setMap(this.map);
+          directionsDisplay.setDirections(response);
+         // console.log(response);
+          this.data=this.data.concat(this.tripDur,this.global_var.LoggedUser);
+          console.log(this.tripDur);
+          this.routeservice.tripDuration(this.data).subscribe(res=>{
+            //console.log(res);
+          });
         } else {
           window.alert('Directions request failed due to '+status);
         }
       });
-}*/
-
+      /*
+     console.log(this.lat1,this.long1);
+     let url: string ="https://maps.googleapis.com/maps/api/directions/json?&origin="+this.lat1+","+this.long1+"&destination="+this.lat2+","+this.long2+"&key="+this.api;
+     this.Http.get(url).subscribe( (response) => {
+             console.log(response);
+             this.response=response;
+      })
+     await this.directionsDisplay.setDirections(this.response);*/
+    }
+  
 }

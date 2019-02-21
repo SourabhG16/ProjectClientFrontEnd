@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { Tab1Page } from './tab1.page';
 // import { Geolocation } from '@ionic-native/geolocation/ngx';
 // import { GoogleMap } from "@ionic-native/google-maps";
+//import { Http } from "@angular/http";
 @NgModule({
   imports: [
     IonicModule,

@@ -76,6 +76,16 @@ Transaction(data)
    })
  );
 }
+tripDuration(data)
+{
+  console.log("Setting Tour Timings:",data);
+  return this.http.post('http://localhost:3000/api/first/login/tripduration',data).pipe(
+   catchError(e => {
+     this.showAlert(e.error.msg);
+     throw new Error(e);
+   })
+ );
+}
 }
 
 

@@ -1,0 +1,4 @@
+#Mon Feb 18 13:41:25 IST 2019
+base.0=C\:\\Users\\Roggh\\Desktop\\Client\\platforms\\android\\app\\build\\intermediates\\transforms\\dex\\release\\0
+path.0=classes.dex
+renamed.0=classes.dex

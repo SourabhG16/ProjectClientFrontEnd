@@ -1,0 +1,24 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "io.ionic.starter"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "io.ionic.starter"
+    },
+    "cordova-plugin-googlemaps": {
+      "API_KEY_FOR_IOS": "AIzaSyBGhOwi5tJLcH5hKBG7fhXLpauPC1Ja76s",
+      "LOCATION_WHEN_IN_USE_DESCRIPTION": "This app wants to get your location while this app runs only.",
+      "LOCATION_ALWAYS_USAGE_DESCRIPTION": "This app wants to get your location always, even this app runs in background.",
+      "PACKAGE_NAME": "io.ionic.starter"
+    }
+  },
+  "dependent_plugins": {}
+}
