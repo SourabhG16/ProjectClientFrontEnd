@@ -136,16 +136,23 @@ async RouteTO()
       }, (response, status) => {
         if (status === 'OK') {
          // console.log(response.routes[0].legs[0].duration.text);
-         response.routes[0].legs[0].duration.text.replace("10 minsNaN","10");
-          this.tripDur=(response.routes[0].legs[0].duration.text)+((response.routes[0].legs[0].duration.text)*1/2);     
+         var a=JSON.stringify(response.routes[0].legs[0].duration.text);
+         a=a.replace(" mins","");
+         console.log("a is:"+a);
+         this.tripDur=JSON.parse(a);
+         var b= +this.tripDur;
+          b=(b)+((b)*1/2);     
+          console.log("B is"+b);
           directionsDisplay.setMap(this.map);
           directionsDisplay.setDirections(response);
          // console.log(response);
-          this.data=this.data.concat(this.tripDur,this.global_var.LoggedUser);
+          this.data=this.data.concat(b,this.global_var.LoggedUser);
           console.log(this.tripDur);
-          this.routeservice.tripDuration(this.data).subscribe(res=>{
-            //console.log(res);
-          });
+          setTimeout(() => {
+            this.routeservice.tripDuration(this.data).subscribe(res=>{
+              //console.log(res);
+            });
+          }, 3000);
         } else {
           window.alert('Directions request failed due to '+status);
         }
