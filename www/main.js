@@ -10,7 +10,7 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Config", function() { return Config; });
-var apikey = 'AIzaSyBGhOwi5tJLcH5hKBG7fhXLpauPC1Ja76s';
+var apikey = 'AIzaSyAhkzBQf5s66LRW6JJt0pI0SzYeSdJtJ5U';
 var Config = /** @class */ (function () {
     function Config() {
     }
@@ -1099,20 +1099,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
 /* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm5/ionic-storage.js");
-/* harmony import */ var _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @auth0/angular-jwt */ "./node_modules/@auth0/angular-jwt/index.js");
-/* harmony import */ var _menu_menu_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./menu/menu.component */ "./src/app/menu/menu.component.ts");
-/* harmony import */ var _components_menu_item_menu_item_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/menu-item/menu-item.component */ "./src/app/components/menu-item/menu-item.component.ts");
-/* harmony import */ var _app_modal_modal_module__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../app/modal/modal.module */ "./src/app/modal/modal.module.ts");
-/* harmony import */ var _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../node_modules/@angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../config */ "./config.ts");
-/* harmony import */ var _global_var_service__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./global-var.service */ "./src/app/global-var.service.ts");
+/* harmony import */ var _angular_http__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/http */ "./node_modules/@angular/http/fesm5/http.js");
+/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm5/ionic-storage.js");
+/* harmony import */ var _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @auth0/angular-jwt */ "./node_modules/@auth0/angular-jwt/index.js");
+/* harmony import */ var _menu_menu_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./menu/menu.component */ "./src/app/menu/menu.component.ts");
+/* harmony import */ var _components_menu_item_menu_item_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/menu-item/menu-item.component */ "./src/app/components/menu-item/menu-item.component.ts");
+/* harmony import */ var _app_modal_modal_module__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../app/modal/modal.module */ "./src/app/modal/modal.module.ts");
+/* harmony import */ var _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../node_modules/@angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../config */ "./config.ts");
+/* harmony import */ var _global_var_service__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./global-var.service */ "./src/app/global-var.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -1146,28 +1148,29 @@ var AppModule = /** @class */ (function () {
     }
     AppModule = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
-            declarations: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"], _menu_menu_component__WEBPACK_IMPORTED_MODULE_12__["MenuComponent"], _components_menu_item_menu_item_component__WEBPACK_IMPORTED_MODULE_13__["MenuItemComponent"]],
+            declarations: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"], _menu_menu_component__WEBPACK_IMPORTED_MODULE_13__["MenuComponent"], _components_menu_item_menu_item_component__WEBPACK_IMPORTED_MODULE_14__["MenuItemComponent"]],
             entryComponents: [],
-            imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["IonicModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_8__["AppRoutingModule"], _app_modal_modal_module__WEBPACK_IMPORTED_MODULE_14__["ModalPageModule"],
+            imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["IonicModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_8__["AppRoutingModule"], _app_modal_modal_module__WEBPACK_IMPORTED_MODULE_15__["ModalPageModule"],
                 // AutoCompleteModule,
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_9__["HttpClientModule"],
-                _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_15__["FormsModule"],
-                _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_15__["ReactiveFormsModule"],
-                _ionic_storage__WEBPACK_IMPORTED_MODULE_10__["IonicStorageModule"].forRoot(),
-                _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_11__["JwtModule"].forRoot({
+                _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_16__["FormsModule"],
+                _node_modules_angular_forms__WEBPACK_IMPORTED_MODULE_16__["ReactiveFormsModule"],
+                _ionic_storage__WEBPACK_IMPORTED_MODULE_11__["IonicStorageModule"].forRoot(),
+                _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_12__["JwtModule"].forRoot({
                     jwtOptionsProvider: {
-                        provide: _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_11__["JWT_OPTIONS"],
+                        provide: _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_12__["JWT_OPTIONS"],
                         useFactory: jwtOptionsFactory,
-                        deps: [_ionic_storage__WEBPACK_IMPORTED_MODULE_10__["Storage"]],
+                        deps: [_ionic_storage__WEBPACK_IMPORTED_MODULE_11__["Storage"]],
                     }
                 })],
             providers: [
                 _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_5__["StatusBar"],
                 _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_4__["SplashScreen"],
                 _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_6__["Geolocation"],
-                _config__WEBPACK_IMPORTED_MODULE_16__["Config"],
+                _config__WEBPACK_IMPORTED_MODULE_17__["Config"],
+                _angular_http__WEBPACK_IMPORTED_MODULE_10__["HttpModule"],
                 { provide: _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouteReuseStrategy"], useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["IonicRouteStrategy"] },
-                _global_var_service__WEBPACK_IMPORTED_MODULE_17__["GlobalVarService"]
+                _global_var_service__WEBPACK_IMPORTED_MODULE_18__["GlobalVarService"]
             ],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]]
         })
@@ -1528,8 +1531,7 @@ var ModalPage = /** @class */ (function () {
         var _this = this;
         this.geolocation.getCurrentPosition().then(function (resp) {
             console.log(resp.coords.latitude, resp.coords.longitude);
-            //this.routeservice.Source(resp.coords.latitude,resp.coords.longitude).subscribe(res =>
-            _this.routeservice.Source(18.500314, 73.861234).subscribe(function (res) {
+            _this.routeservice.Source(resp.coords.latitude, resp.coords.longitude).subscribe(function (res) {
                 if (res != null) {
                     _this.src = res;
                     _this.srcbool = true;
@@ -1666,7 +1668,7 @@ var RouteService = /** @class */ (function () {
             lat: latitude,
             longi: longitude
         };
-        return this.http.post('http://192.168.1.104:3000/api/first/login/findstation', data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(function (e) {
+        return this.http.post('http://ec2-52-66-169-149.ap-south-1.compute.amazonaws.com:80/api/first/login/findstation', data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(function (e) {
             _this.showAlert(e.error.msg);
             throw new Error(e);
         }));
@@ -1679,7 +1681,7 @@ var RouteService = /** @class */ (function () {
         var data = {
             name: credentials,
         };
-        return this.http.post('http://192.168.1.104:3000/api/first/login/searchdest', data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(function (e) {
+        return this.http.post('http://ec2-52-66-169-149.ap-south-1.compute.amazonaws.com:80/api/first/login/searchdest', data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(function (e) {
             _this.showAlert(e.error.msg);
             throw new Error(e);
         }));
@@ -1697,7 +1699,7 @@ var RouteService = /** @class */ (function () {
         var _this = this;
         console.log("in triprecord");
         console.log(data);
-        return this.http.post('http://192.168.1.104:3000/api/first/login/triprecord', data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(function (e) {
+        return this.http.post('http://ec2-52-66-169-149.ap-south-1.compute.amazonaws.com:80/api/first/login/triprecord', data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(function (e) {
             _this.showAlert(e.error.msg);
             throw new Error(e);
         }));
@@ -1705,7 +1707,15 @@ var RouteService = /** @class */ (function () {
     RouteService.prototype.Transaction = function (data) {
         var _this = this;
         console.log("In Transaction" + data[1].AreaName);
-        return this.http.post('http://192.168.1.104:3000/api/first/login/transaction', data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(function (e) {
+        return this.http.post('http://ec2-52-66-169-149.ap-south-1.compute.amazonaws.com:80/api/first/login/transaction', data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(function (e) {
+            _this.showAlert(e.error.msg);
+            throw new Error(e);
+        }));
+    };
+    RouteService.prototype.tripDuration = function (data) {
+        var _this = this;
+        console.log("Setting Tour Timings:", data);
+        return this.http.post('http://ec2-52-66-169-149.ap-south-1.compute.amazonaws.com:80/api/first/login/tripduration', data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(function (e) {
             _this.showAlert(e.error.msg);
             throw new Error(e);
         }));
@@ -1837,14 +1847,14 @@ var AuthService = /** @class */ (function () {
     };
     AuthService.prototype.register = function (credentials) {
         var _this = this;
-        return this.http.post('http://192.168.1.104:3000/api/first/register', credentials).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(function (e) {
+        return this.http.post('http://ec2-52-66-169-149.ap-south-1.compute.amazonaws.com:80/api/first/register', credentials).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(function (e) {
             _this.showAlert(e.error.msg);
             throw new Error(e);
         }));
     };
     AuthService.prototype.login = function (credentials) {
         var _this = this;
-        return this.http.post('http://192.168.1.104:3000/api/first/login', credentials)
+        return this.http.post('http://ec2-52-66-169-149.ap-south-1.compute.amazonaws.com:80/api/first/login', credentials)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (res) {
             _this.storage.set(TOKEN_KEY, res['token']);
             _this.user = _this.helper.decodeToken(res['token']);
@@ -1865,7 +1875,7 @@ var AuthService = /** @class */ (function () {
     };
     AuthService.prototype.getSpecialData = function () {
         var _this = this;
-        return this.http.get('http://192.168.1.104:5000/api/special').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(function (e) {
+        return this.http.get('http://ec2-52-66-169-149.ap-south-1.compute.amazonaws.com:80/api/special').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(function (e) {
             var status = e.status;
             if (status === 401) {
                 _this.showAlert('You are not authorized for this!');

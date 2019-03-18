@@ -30,6 +30,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 // import { Geolocation } from '@ionic-native/geolocation/ngx';
 // import { GoogleMap } from "@ionic-native/google-maps";
+//import { Http } from "@angular/http";
 var Tab1PageModule = /** @class */ (function () {
     function Tab1PageModule() {
     }
@@ -93,6 +94,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _global_var_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../global-var.service */ "./src/app/global-var.service.ts");
 /* harmony import */ var _route_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../route.service */ "./src/app/route.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -139,7 +141,7 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 };
 
 
-//import { ActionSheetController } from '@ionic/angular';
+
 
 
 
@@ -147,7 +149,7 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 var Tab1Page = /** @class */ (function () {
-    function Tab1Page(zone, geolocation, modalController, Config, global_var, routeservice, Router) {
+    function Tab1Page(zone, geolocation, modalController, Config, global_var, routeservice, Router, Http) {
         var _this = this;
         this.zone = zone;
         this.geolocation = geolocation;
@@ -156,17 +158,20 @@ var Tab1Page = /** @class */ (function () {
         this.global_var = global_var;
         this.routeservice = routeservice;
         this.Router = Router;
+        this.Http = Http;
+        this.data = [];
         this.location = { lat: null, lng: null };
         this.markerOptions = { position: null, map: null, title: null };
         /*load google map script dynamically */
         var apiKey = Config.apireturn();
+        this.api = apiKey;
         var script = document.createElement('script');
         script.id = 'googleMap';
         if (apiKey) {
-            script.src = 'https://maps.googleapis.com/maps/api/js?key=' + apiKey;
+            script.src = 'https://maps.googleapis.com/maps/api/js?&language=en&key=' + apiKey;
         }
         else {
-            script.src = 'https://maps.googleapis.com/maps/api/js?key= ';
+            script.src = 'https://maps.googleapis.com/maps/api/js?&language=en&key= ';
         }
         document.head.appendChild(script);
         /*Get Current location*/
@@ -183,14 +188,13 @@ var Tab1Page = /** @class */ (function () {
         setTimeout(function () {
             _this.map = new google.maps.Map(_this.mapElement.nativeElement, _this.mapOptions);
             /*Marker Options*/
+            //var directionsService = new google.maps.DirectionsService();
+            var directionsDisplay = new google.maps.DirectionsRenderer;
             _this.markerOptions.position = _this.location;
             _this.markerOptions.map = _this.map;
             _this.markerOptions.title = 'My Location';
             _this.marker = new google.maps.Marker(_this.markerOptions);
-            _this.directionsService = new google.maps.DirectionsService;
-            _this.directionsDisplay = new google.maps.DirectionsRenderer;
-            _this.directionsDisplay.setMap(_this.map);
-            // this.RouteTO();
+            directionsDisplay.setMap(_this.map);
         }, 3000);
     }
     Tab1Page.prototype.ngOnInit = function () {
@@ -222,7 +226,7 @@ var Tab1Page = /** @class */ (function () {
                                 console.log("data pres");
                                 _this.RouteJson = data; // Here's your selected user!
                                 console.log(_this.RouteJson);
-                                _this.lat1 = _this.RouteJson.data[0].Longitude;
+                                _this.lat1 = _this.RouteJson.data[0].Latitude;
                                 _this.lat2 = _this.RouteJson.data[1].Latitude;
                                 _this.long2 = _this.RouteJson.data[1].Longitude;
                                 _this.long1 = _this.RouteJson.data[0].Longitude;
@@ -236,10 +240,69 @@ var Tab1Page = /** @class */ (function () {
                             }
                             //console.log(this.RouteJson.data[0].AreaName);
                             //console.log(this.RouteJson.data[1].AreaName); 
-                            _this.Router.navigate(['/payments' /*,{p1:this.RouteJson.data[0].AreaName,p2:this.RouteJson.data[1].AreaName}*/]);
+                            _this.Router.navigate(['/payments']);
+                            _this.RouteTO();
                         });
                         return [4 /*yield*/, modal.present()];
                     case 2: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    Tab1Page.prototype.RouteTO = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var directionsService, directionsDisplay, start, end;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        this.mapOptions = {
+                            center: this.location,
+                            zoom: 15,
+                            mapTypeControl: false
+                        };
+                        this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapOptions);
+                        directionsService = new google.maps.DirectionsService();
+                        directionsDisplay = new google.maps.DirectionsRenderer();
+                        if (!(typeof this.lat1 == "undefined" || typeof this.long1 == "undefined")) return [3 /*break*/, 2];
+                        return [4 /*yield*/, this.RouteTO()];
+                    case 1:
+                        _a.sent();
+                        _a.label = 2;
+                    case 2:
+                        ;
+                        start = new google.maps.LatLng(this.lat1, this.long1);
+                        end = new google.maps.LatLng(this.lat2, this.long2);
+                        directionsService.route({
+                            origin: start,
+                            destination: end,
+                            travelMode: 'DRIVING'
+                        }, function (response, status) {
+                            if (status === 'OK') {
+                                // console.log(response.routes[0].legs[0].duration.text);
+                                var a = JSON.stringify(response.routes[0].legs[0].duration.text);
+                                a = a.replace(" mins", "");
+                                console.log("a is:" + a);
+                                _this.tripDur = JSON.parse(a);
+                                var b = +_this.tripDur;
+                                b = (b) + ((b) * 1 / 2);
+                                console.log("B is" + b);
+                                directionsDisplay.setMap(_this.map);
+                                directionsDisplay.setDirections(response);
+                                // console.log(response);
+                                _this.data = _this.data.concat(b, _this.global_var.LoggedUser);
+                                console.log(_this.tripDur);
+                                setTimeout(function () {
+                                    _this.routeservice.tripDuration(_this.data).subscribe(function (res) {
+                                        //console.log(res);
+                                    });
+                                }, 3000);
+                            }
+                            else {
+                                window.alert('Directions request failed due to ' + status);
+                            }
+                        });
+                        return [2 /*return*/];
                 }
             });
         });
@@ -255,7 +318,7 @@ var Tab1Page = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./tab1.page.scss */ "./src/app/tab1/tab1.page.scss")]
         }),
         __metadata("design:paramtypes", [_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"], _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_1__["Geolocation"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"], _config__WEBPACK_IMPORTED_MODULE_4__["Config"], _global_var_service__WEBPACK_IMPORTED_MODULE_5__["GlobalVarService"], _route_service__WEBPACK_IMPORTED_MODULE_6__["RouteService"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"]])
+            _angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"], _angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HttpClient"]])
     ], Tab1Page);
     return Tab1Page;
 }());

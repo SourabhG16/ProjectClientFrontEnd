@@ -37,7 +37,7 @@ export class RegisterPage implements OnInit {
        Birthdate: ['', Validators.required],
        Address: ['', Validators.required],
        Email: ['', [EmailValidator, Validators.required]],
-       IdReceiver: [null, Validators.required],
+       IdReceiver: ['', Validators.required],
        Confirm: ['', [Validators.required, Validators.minLength(6)]]
     });
     // {

@@ -124,7 +124,7 @@ var RegisterPage = /** @class */ (function () {
             Birthdate: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
             Address: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
             Email: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["EmailValidator"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]],
-            IdReceiver: [null, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
+            IdReceiver: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
             Confirm: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].minLength(6)]]
         });
         // {
