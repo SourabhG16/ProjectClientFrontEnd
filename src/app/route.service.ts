@@ -23,7 +23,7 @@ export class RouteService {
       lat:latitude,
       longi:longitude
     }
-    return this.http.post('http://localhost:3000/api/first/login/findstation',data).pipe(
+    return this.http.post('http://ec2-52-66-169-149.ap-south-1.compute.amazonaws.com:80/api/first/login/findstation',data).pipe(
       catchError(e => {
         this.showAlert(e.error.msg);
         throw new Error(e);
@@ -39,7 +39,7 @@ export class RouteService {
       {
         name:credentials,
       }
-        return this.http.post('http://localhost:3000/api/first/login/searchdest',data).pipe(
+        return this.http.post('http://ec2-52-66-169-149.ap-south-1.compute.amazonaws.com:80/api/first/login/searchdest',data).pipe(
           catchError(e => {
             this.showAlert(e.error.msg);
             throw new Error(e);
@@ -59,7 +59,7 @@ TripRecord(data)
 { 
   console.log("in triprecord");
   console.log(data);
-  return this.http.post('http://localhost:3000/api/first/login/triprecord',data).pipe(
+  return this.http.post('http://ec2-52-66-169-149.ap-south-1.compute.amazonaws.com:80/api/first/login/triprecord',data).pipe(
    catchError(e => {
      this.showAlert(e.error.msg);
      throw new Error(e);
@@ -69,7 +69,7 @@ TripRecord(data)
 Transaction(data)
 {
   console.log("In Transaction"+data[1].AreaName);
-  return this.http.post('http://localhost:3000/api/first/login/transaction',data).pipe(
+  return this.http.post('http://ec2-52-66-169-149.ap-south-1.compute.amazonaws.com:80/api/first/login/transaction',data).pipe(
    catchError(e => {
      this.showAlert(e.error.msg);
      throw new Error(e);
@@ -79,7 +79,7 @@ Transaction(data)
 tripDuration(data)
 {
   console.log("Setting Tour Timings:",data);
-  return this.http.post('http://localhost:3000/api/first/login/tripduration',data).pipe(
+  return this.http.post('http://ec2-52-66-169-149.ap-south-1.compute.amazonaws.com:80/api/first/login/tripduration',data).pipe(
    catchError(e => {
      this.showAlert(e.error.msg);
      throw new Error(e);
